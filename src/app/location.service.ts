@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { environment as env } from '../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,11 @@ export class LocationService {
       }, e => {
         console.log(e)
       })
+  }
+
+  getTime(city) {
+    const URL = `https://dev.virtualearth.net/REST/v1/TimeZone/?query=${city.city},${city.state},us&key=${env.BING_API}`
+    return this.http.get(URL)
   }
 
 }

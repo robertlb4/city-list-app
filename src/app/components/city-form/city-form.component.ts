@@ -21,14 +21,17 @@ export class CityFormComponent implements OnInit {
   }
 
   filterStates(value) {
-    console.log(this.form)
     this._location.updatefilterdStates(value)
   }
 
   formSubmit(formInfo) {
-    console.log(this.form)
-    this.addCity.emit(formInfo)
-    this.form.resetForm()
+    this._location.getTime(formInfo)
+      .subscribe((res: any) => {
+        console.log(res.resourceSets.resources.)
+        this.addCity.emit(formInfo)
+        this.form.resetForm()
+      })
+
 }
 
 
