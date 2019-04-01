@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LocationService {
 
-  private states: string[];
+  public states: string[] = [];
   private filteredStates: BehaviorSubject<string[]> = new BehaviorSubject([])
 
   constructor(private http: HttpClient) { 

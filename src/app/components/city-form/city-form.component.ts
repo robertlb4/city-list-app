@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { LocationService } from '../../location.service';
 import { Observable } from 'rxjs';
+import { StateValidatorDirective } from '../../state.validator.directive';
 
 @Component({
   selector: 'app-city-form',

@@ -19,9 +19,10 @@
         placeholder="State"
         name='state'
         [matAutocomplete]="auto"
-        required
         [(ngModel)] ='state'
         (ngModelChange)="filterStates(state)"
+        isState
+        required
       />
 
       <mat-autocomplete #auto="matAutocomplete">
