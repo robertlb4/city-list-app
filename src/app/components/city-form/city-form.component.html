@@ -1,0 +1,41 @@
+<form #form="ngForm" (ngSubmit)="form.valid && formSubmit(form.value)">
+    <mat-form-field>
+      <input 
+        matInput
+        type="text"
+        name="city"
+        #cityInput="ngModel"
+        pattern="^[a-zA-Z]+(?!.*--|.*\s\s|.*\.\.)[a-zA-Z-.\s]+"
+        placeholder="City"
+        [(ngModel)]='city'
+        required
+        minlength=3
+        maxlength=25
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput 
+        placeholder="State"
+        name='state'
+        [matAutocomplete]="auto"
+        required
+        [(ngModel)] ='state'
+        (ngModelChange)="filterStates(state)"
+      />
+
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let state of filteredStates$ | async" [value]='state'>{{state}}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button mat-mini-fab style="justify-self: flex-end">
+      <mat-icon>add</mat-icon>
+    </button>
+  </form>
+  <div *ngIf="cityInput.touched">
+      <small *ngIf="cityInput.errors?.pattern">Please enter a valid city.</small>
+      <small *ngIf="cityInput.errors?.required">City is required</small>
+  </div>
+  <div >
+    <small></small>
+  </div>
