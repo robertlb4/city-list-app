@@ -1,0 +1,9 @@
+<mat-list *ngIf="list.length > 0">
+  <div *ngFor="let item of list">
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <span>City: {{item.city}}</span><span style='flex-grow: 2'></span><span>State: {{item.state}}</span>
+    </mat-list-item>
+
+  </div>
+</mat-list>
