@@ -12,7 +12,6 @@ export class CityFormComponent implements OnInit {
   @ViewChild('form') form;
   @Output() addCity = new EventEmitter()
 
-
   filteredStates$: Observable<string[]>;
 
   constructor(private _location: LocationService) { }
@@ -22,12 +21,13 @@ export class CityFormComponent implements OnInit {
   }
 
   filterStates(value) {
+    console.log(this.form)
     this._location.updatefilterdStates(value)
   }
 
   formSubmit(formInfo) {
+    console.log(this.form)
     this.addCity.emit(formInfo)
-    // this.previousEntries.push(cityInfo)
     this.form.resetForm()
 }
 
