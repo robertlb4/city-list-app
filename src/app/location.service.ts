@@ -52,7 +52,7 @@ export class LocationService {
 
   //retrieve saved cities form backend for initial app loading
   initSavedCities() {
-    this.http.get(`http://localhost:3000/api/cities`)
+    this.http.get(`${env.URL}/api/cities`)
       .subscribe((res: any) => {
         this.savedCities.next(res);
       })
@@ -68,7 +68,7 @@ export class LocationService {
   }
   //save to back end and transmit new values
   saveCity(city) {
-    this.http.post(`http://localhost:3000/api/cities`, city)
+    this.http.post(`${env.URL}/api/cities`, city)
       .subscribe(res => {
         this.updateSavedCities(res);
       })

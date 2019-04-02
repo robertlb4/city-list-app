@@ -12,6 +12,8 @@ import { StateValidatorDirective } from '../../state.validator.directive';
 export class CityFormComponent implements OnInit {
   @ViewChild('form') form;
 
+  city;
+  state;
   filteredStates$: Observable<string[]>;
 
   constructor(private _location: LocationService) { }
