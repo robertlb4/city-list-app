@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   BING_API: 'AioiLeBiQTg-eaOvKw3MZkfPfy-y3mfi3hy_PaZhFmxWzJqvhqiVX3yTunp55fCY',
-  URL: 'http://localhost:3000/'
+  URL: 'http://localhost:3000'
 };
 
 /*
