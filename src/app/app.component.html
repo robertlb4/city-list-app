@@ -7,20 +7,18 @@
         <mat-card-title>Enter a City</mat-card-title>
       </mat-card-header>
         <mat-card-content>
-          <app-city-form (addCity)="updateSavedCities($event)"></app-city-form>
+          <app-city-form></app-city-form>
       </mat-card-content>
-      <mat-card-actions align="end">
-
-      </mat-card-actions>
     </mat-card>
   </div>
-
-  <div class="card-container">
-    <mat-card class="card">
-      <mat-card-header>
-          <button class="random-button" mat-flat-button color="primary" (click)="showRandom()">Random City</button>
-      </mat-card-header>
-        <app-city-list [list]="savedCities"></app-city-list>
-    </mat-card>
-  </div>
+  <ng-container *ngIf="savedCities$ | async; let list">
+    <div class="card-container">
+      <mat-card class="card">
+        <mat-card-header>
+            <button class="random-button" mat-flat-button color="primary" (click)="showRandom(list)">Random City</button>
+        </mat-card-header>
+          <app-city-list [list]="list"></app-city-list>
+      </mat-card>
+    </div>
+  </ng-container>
 </main>
