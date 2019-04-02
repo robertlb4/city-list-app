@@ -1,1 +1,5 @@
 <h1 *ngIf="data.randomCity" mat-dialog-title>{{data.randomCity.city}}, {{data.randomCity.state}}</h1>
+<mat-dialog-content>
+  <small>Time Zone: {{data.randomCity.timeZone}} ({{data.randomCity.timeZoneAbv}})</small>
+  <small>Current Time: {{data.randomCity.currentTime}}</small>
+</mat-dialog-content>
