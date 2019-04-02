@@ -27,17 +27,22 @@
       />
 
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let state of filteredStates$ | async" [value]='state'>{{state}}</mat-option>
+        <mat-option *ngFor="let state of filteredStates$ | async" [value]='state | titlecase'>{{state | titlecase}}</mat-option>
       </mat-autocomplete>
     </mat-form-field>
     <button mat-mini-fab style="justify-self: flex-end">
       <mat-icon>add</mat-icon>
     </button>
   </form>
-  <div *ngIf="cityInput.touched">
-      <small *ngIf="cityInput.errors?.pattern">Please enter a valid city.</small>
-      <small *ngIf="cityInput.errors?.required">City is required</small>
+  <div class='warning-container'>
+    <div *ngIf="cityInput.touched" class="warn">
+        <small *ngIf="cityInput.errors?.pattern">Please enter a valid city.</small>
+        <small *ngIf="cityInput.errors?.required">City is required.</small>
+    </div>
+    <div *ngIf="stateInput.touched" class='state-warning warn'>
+      <small *ngIf="stateInput.errors?.required">State is required.</small>
+      <small *ngIf="stateInput.errors?.stateInvalid">Please enter a valid state.</small>
+    </div>
+    <div class="spacer"></div>
   </div>
-  <div *ngIf="">
-    <small></small>
-  </div>
+ 

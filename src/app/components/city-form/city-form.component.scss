@@ -6,3 +6,18 @@ form {
 mat-form-field.mat-form-field {
   width: 40%
 }
+
+.warning-container {
+  display: flex;
+  justify-content: space-between
+
+}
+
+.warn{
+  color: red;
+  width: 40%;
+}
+
+.spacer {
+  width: 40px
+}

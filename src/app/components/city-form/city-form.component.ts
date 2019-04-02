@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LocationService } from '../../location.service';
 import { Observable } from 'rxjs';
 import { StateValidatorDirective } from '../../state.validator.directive';
+
 
 @Component({
   selector: 'app-city-form',
@@ -10,7 +11,6 @@ import { StateValidatorDirective } from '../../state.validator.directive';
 })
 export class CityFormComponent implements OnInit {
   @ViewChild('form') form;
-  @Output() addCity = new EventEmitter()
 
   filteredStates$: Observable<string[]>;
 
@@ -23,16 +23,10 @@ export class CityFormComponent implements OnInit {
   filterStates(value) {
     this._location.updatefilterdStates(value)
   }
-
+  //save city and reset form on submit
   formSubmit(formInfo) {
-    this._location.getTime(formInfo)
-      .subscribe((res: any) => {
-        console.log(res.resourceSets.resources.)
-        this.addCity.emit(formInfo)
-        this.form.resetForm()
-      })
-
-}
-
+    this._location.saveCity(formInfo)
+    this.form.resetForm()
+  }
 
 }
