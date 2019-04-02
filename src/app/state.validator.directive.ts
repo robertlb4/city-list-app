@@ -1,23 +1,9 @@
+// Async Validator to ensure that only states form the list are seleted
 import { Directive, OnDestroy } from '@angular/core';
-import { NG_ASYNC_VALIDATORS, AbstractControl, ValidatorFn, Validator, FormControl, AsyncValidatorFn } from '@angular/forms';
+import { NG_ASYNC_VALIDATORS, FormControl, AsyncValidatorFn, AsyncValidator } from '@angular/forms';
 import { LocationService } from './location.service';
 import { Observable, Subject } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, first, takeUntil } from 'rxjs/operators';
-
-
-// function stateValidator(list: any[]): ValidatorFn {
-//   return (control: AbstractControl, ) => {
-//     let isValid = list.indexOf(control.value)
-//     console.log(list)
-//     if (isValid !== -1) return null
-//     return {
-//       validState: {
-//         valid: false
-//       }
-//     }
-//   }
-// };
-
 
 @Directive({
   selector: '[isState][ngModel]',
@@ -25,7 +11,8 @@ import { map, debounceTime, distinctUntilChanged, first, takeUntil } from 'rxjs/
     { provide: NG_ASYNC_VALIDATORS, useExisting: StateValidatorDirective, multi: true }
   ]
 })
-export class StateValidatorDirective implements Validator, OnDestroy {
+export class StateValidatorDirective implements AsyncValidator, OnDestroy {
+  //used to unsubscribe onDestroy with takeUntil
   private ngUnsubscribe = new Subject();
   
   constructor(private _location: LocationService) {}
@@ -34,10 +21,11 @@ export class StateValidatorDirective implements Validator, OnDestroy {
     return this.validateStateObservable(this._location.StatesAsObs(), c.value).pipe(debounceTime(500), distinctUntilChanged());
   }
 
+  //compares entered state against list of states.  returns validation error if not found
   validateStateObservable(list: Observable<string[]>, state) {
     return new Observable(observer => {
       list.pipe(takeUntil(this.ngUnsubscribe)).subscribe(states => {
-        if (states.includes(state)) {
+        if (states.includes(state.toLowerCase())) {
           observer.next(null)
           observer.complete()
         } else {
